@@ -2,7 +2,7 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="{{ baseurl }}/" data-editable="site.title">{{ site.title }}</a>
+    <a class="site-title" href="." data-editable="site.title">{{ site.title }}</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -16,7 +16,7 @@
       <div class="trigger">
         {% for page in site.pages %}
           {% if page.title %}
-          <a class="page-link" href="{{ page.url | prepend: baseurl }}">{{ page.title }}</a>
+          <a class="page-link" href="{{ page.url }}">{{ page.title }}</a>
           {% endif %}
         {% endfor %}
       </div>
