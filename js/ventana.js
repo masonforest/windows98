@@ -15,11 +15,13 @@ $(function(){
     });
   }
 
-  function publish(file, content){
+  function publish(file, page){
     var repo = github.getRepo('masonforest', 'windows98');
 
     repo.read('gh-pages', file, function(err, data) {
-      contents = matter.stringify(content, matter(data).data)
+      frontMatter = matter(data).data
+      frontMatter.title = page.title
+      contents = matter.stringify(page.content, frontMatter)
       repo.write(
         'gh-pages',
         file,
@@ -44,25 +46,39 @@ $(function(){
     });
 
     $(".ventana").show();
-    editButton = $("<button class=ventana-edit>Edit</button>");
-    $(".editable").after(editButton);
   }
 
-  $("body").on("click", ".ventana-edit",function(event){
-    var editable = $(event.target).prev(".editable");
-    $('.ventana-editor').val(editable.text())
+  $("body").on("click", ".ventana-edit-button",function(event){
+    $('.ventana-editor').show();
+    $('.ventana-title').show();
+    $('.ventana-editor').val($('[data-ventana=content]').text().trim())
+    $('.ventana-title').val($('[data-ventana=title]').text().trim())
     var publish = $("<input type=submit class=ventana-publish value=Publish />")
-    $('.ventana-edit').replaceWith(publish)
+    $('.ventana-edit-button').replaceWith(publish)
   });
 
   $('.ventana-editor').keyup(function(){
-    $('.editable').text($(this).val())
+    $('[data-ventana=content]').text($(this).val())
+  });
+
+  $('.ventana-title').keyup(function(){
+    $('[data-ventana=title]').text($(this).val())
+  });
+
+  $(".ventana-logout-button").click(function(){
+    localStorage.removeItem("accessToken");
+    $(".ventana").hide()
   });
 
   $("body").on("click",'.ventana-publish', function(event){
     $(event.target).attr("disabled", "true")
     $(event.target).val("Publishing...")
-    publish("about.html", $('.ventana-editor').val());
+    publish(
+      "about.html",
+      {
+        content: $('.ventana-editor').val(),
+        title: $('.ventana-title').val()
+      });
   });
 });
 

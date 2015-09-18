@@ -1,22 +1,29 @@
 .ventana {
+  z-index: 1;
   display: none;
   position: absolute;
-  top: 0;
+  top: 10px;
   right: 10px;
-}
-
-button.ventana-edit {
-  position: absolute;
 }
 
 .wrapper {
   position: relative;
 }
 
-.ventana-editor {
+.ventana-title {
+  display: none;
   position: absolute;
   top: 100px;
-  height: 300px;
+  left: 100px
+  height: 320px;
+}
+
+.ventana-editor {
+  display: none;
+  position: absolute;
+  top: 130px;
+  left: 100px
+  height: 320px;
 }
 
 .editable {
