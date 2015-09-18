@@ -1,4 +1,15 @@
 $(function(){
+  function reloadOnPublish(lastPublishedAt){
+    base = $("")
+    $.get("published_at.html",function(data){
+      if(lastPublishedAt && lastPublishedAt != data) {
+        location.reload();
+      } else {
+        setTimeout(function(){reloadOnPublish(data)}, 1000)
+      }
+    });
+  }
+
   function publish(file, content){
     var repo = github.getRepo('masonforest', 'windows98');
     repo.listBranches(function(err,branches) { console.log(branches);})
@@ -11,7 +22,7 @@ $(function(){
         contents,
         "Windows 98 - Update",
         function(){
-          setTimeout(function(){ location.reload(); }, 7000);
+          reloadOnPublish();
         }
         )
     });
