@@ -1,7 +1,10 @@
 $(function(){
   function reloadOnPublish(lastPublishedAt){
     base = $("")
-    $.get("published_at.html",function(data){
+    $.ajax(
+      url: "published_at.html",
+      cache: false,
+      success: function(data){
       if(lastPublishedAt && lastPublishedAt != data) {
         location.reload();
       } else {
