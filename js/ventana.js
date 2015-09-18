@@ -59,6 +59,8 @@ $(function(){
 
   $("body").on("click",'.ventana-publish', function(){
     console.log($('.ventana-editor').val());
+    $(this).attr("disabled", "true")
+    $(this).text("Publishing...")
     publish("about.html", $('.ventana-editor').val());
   });
 });
