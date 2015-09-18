@@ -1,7 +1,7 @@
 {%if page.url == "/index.html" %}
-  {% assign baseurl = "." %}
+  {% assign baseurl = "./" %}
 {% else %}
-  {% assign baseurl = ".." %}
+  {% assign baseurl = "../" %}
 {% endif %}
 <head>
   <base href="{{baseurl}}">
