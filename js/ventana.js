@@ -57,10 +57,10 @@ $(function(){
     $('.editable').text($(this).val())
   });
 
-  $("body").on("click",'.ventana-publish', function(){
+  $("body").on("click",'.ventana-publish', function(event){
     console.log($('.ventana-editor').val());
-    $(this).attr("disabled", "true")
-    $(this).text("Publishing...")
+    $(event.target).attr("disabled", "true")
+    $(event.tatget).text("Publishing...")
     publish("about.html", $('.ventana-editor').val());
   });
 });
