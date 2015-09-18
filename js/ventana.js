@@ -60,7 +60,7 @@ $(function(){
   $("body").on("click",'.ventana-publish', function(event){
     console.log($('.ventana-editor').val());
     $(event.target).attr("disabled", "true")
-    $(event.tatget).text("Publishing...")
+    $(event.target).val("Publishing...")
     publish("about.html", $('.ventana-editor').val());
   });
 });
