@@ -2,13 +2,15 @@ $(function(){
   function reloadOnPublish(lastPublishedAt){
     base = $("")
     $.ajax(
-      url: "published_at.html",
-      cache: false,
-      success: function(data){
-      if(lastPublishedAt && lastPublishedAt != data) {
-        location.reload();
-      } else {
-        setTimeout(function(){reloadOnPublish(data)}, 1000)
+      {
+        url: "published_at.html",
+        cache: false,
+        success: function(data){
+        if(lastPublishedAt && lastPublishedAt != data) {
+          location.reload();
+        } else {
+          setTimeout(function(){reloadOnPublish(data)}, 1000)
+        }
       }
     });
   }
