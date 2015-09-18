@@ -1,6 +1,7 @@
 $(function(){
   function publish(file, content){
     var repo = github.getRepo('masonforest', 'windows98');
+    repo.listBranches(function(err,branches) { console.log(branches);})
 
     repo.read('gh-pages', file, function(err, data) {
       contents = matter.stringify(content, matter(data).data)
@@ -12,7 +13,7 @@ $(function(){
         function(){
           alert("done");
         }
-    )
+        )
     });
   }
   if (window.location.href.match(/\?access_token=(.*)/)){
@@ -33,7 +34,6 @@ $(function(){
     $(".editable").after(editButton);
   }
 
-  publish("about.html", "test")
   $("body").on("click", ".ventana-edit",function(event){
     var editable = $(event.target).prev(".editable");
     console.log($(editable).text())
