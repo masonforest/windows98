@@ -11,7 +11,7 @@ $(function(){
         contents,
         "Windows 98 - Update",
         function(){
-          alert("done");
+          setTimeout(function(){ location.reload(); }, 7000);
         }
         )
     });
