@@ -14,15 +14,14 @@
   display: none;
   position: absolute;
   top: 100px;
-  left: 100px
-  height: 320px;
+  left: 10px;
 }
 
 .ventana-editor {
   display: none;
   position: absolute;
   top: 130px;
-  left: 100px
+  left: 10px;
   height: 320px;
 }
 
