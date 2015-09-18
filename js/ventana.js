@@ -12,7 +12,6 @@ $(function(){
 
   function publish(file, content){
     var repo = github.getRepo('masonforest', 'windows98');
-    repo.listBranches(function(err,branches) { console.log(branches);})
 
     repo.read('gh-pages', file, function(err, data) {
       contents = matter.stringify(content, matter(data).data)
@@ -27,12 +26,11 @@ $(function(){
         )
     });
   }
+
   if (window.location.href.match(/\?access_token=(.*)/)){
     var accessToken = window.location.href.match(/\?access_token=(.*)/)[1];
     localStorage.accessToken = accessToken;
   }
-
-  console.log(localStorage.accessToken);
 
   if(localStorage.accessToken){
     window.github = new Github({
@@ -47,7 +45,6 @@ $(function(){
 
   $("body").on("click", ".ventana-edit",function(event){
     var editable = $(event.target).prev(".editable");
-    console.log($(editable).text())
     $('.ventana-editor').val(editable.text())
     var publish = $("<input type=submit class=ventana-publish value=Publish />")
     $('.ventana-edit').replaceWith(publish)
@@ -58,7 +55,6 @@ $(function(){
   });
 
   $("body").on("click",'.ventana-publish', function(event){
-    console.log($('.ventana-editor').val());
     $(event.target).attr("disabled", "true")
     $(event.target).val("Publishing...")
     publish("about.html", $('.ventana-editor').val());
