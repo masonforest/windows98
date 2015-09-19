@@ -1,5 +1,5 @@
 $(function(){
-  loginLink = $('.ventana-login').attr('href') + "&state=" + window.location
+  loginLink = $('.ventana-login').attr('href') + "&state=" + window.location.href.split('?')[0]
   console.log(loginLink)
   $('.ventana-login').attr('href', loginLink)
 
