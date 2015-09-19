@@ -1,6 +1,9 @@
 $(function(){
+  loginLink = $('.ventana-login').attr('href') + "&state=" + window.location
+  console.log(loginLink)
+  $('.ventana-login').attr('href', loginLink)
+
   function reloadOnPublish(lastPublishedAt){
-    base = $("")
     $.ajax(
       {
         url: "published_at.html",
