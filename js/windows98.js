@@ -1,4 +1,6 @@
 $(function(){
+  var username = window.location.hostname.split(".")[0];
+  var repo = window.location.pathname.split("/")[1];
   loginLink = $('.ventana-login').attr('href') + "&state=" + window.location.href.split('?')[0]
   console.log(loginLink)
   $('.ventana-login').attr('href', loginLink)
@@ -19,7 +21,7 @@ $(function(){
   }
 
   function publish(file, page){
-    var repo = github.getRepo('masonforest', 'windows98');
+    var repo = github.getRepo(username, repo);
 
     repo.read('gh-pages', file, function(err, data) {
       frontMatter = matter(data).data
