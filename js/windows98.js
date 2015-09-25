@@ -64,7 +64,7 @@ $(function(){
     window.github = new Github({
       token: localStorage.accessToken,
       auth: "oauth",
-      apiUrl: w98.githubApiUrl + "/api/v3"
+      apiUrl: w98.githubApiUrl
     });
 
     $(".w98").show();
