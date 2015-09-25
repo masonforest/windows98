@@ -2,4 +2,4 @@
 layout: page
 title: 'Welcome!'
 ---
-Welcome
+This is Windows 98!
