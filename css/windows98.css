@@ -1,4 +1,4 @@
-.ventana {
+.w98 {
   z-index: 1;
   display: none;
   position: absolute;
@@ -10,14 +10,14 @@
   position: relative;
 }
 
-.ventana-title {
+.w98-title {
   display: none;
   position: absolute;
   top: 100px;
   left: 10px;
 }
 
-.ventana-editor {
+.w98-editor {
   display: none;
   position: absolute;
   top: 130px;

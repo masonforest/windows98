@@ -1,8 +1,21 @@
 $(function(){
-  var username = window.location.hostname.split(".")[0];
-  var repoName = window.location.pathname.split("/")[1];
-  loginLink = $('.ventana-login').attr('href') + "&state=" + window.location.href.split('?')[0]
-  $('.ventana-login').attr('href', loginLink)
+  if(!window.w98) {
+    window.w98 = {};
+  }
+  if(!window.w98.username) {
+    window.w98.username = window.location.hostname.split(".")[0];
+  }
+
+  if(!window.w98.repo) {
+    window.w98.repo = window.location.pathname.split("/")[1];
+  }
+
+  if(!window.w98.githubApiUrl){
+    window.w98.githubApiUrl = "https://api.github.com";
+  }
+
+  loginLink = $('.w98-login').attr('href') + "&state=" + window.location.href.split('?')[0]
+  $('.w98-login').attr('href', loginLink)
 
   function reloadOnPublish(lastPublishedAt){
     $.ajax(
@@ -20,7 +33,7 @@ $(function(){
   }
 
   function publish(file, page){
-    var repo = github.getRepo(username, repoName);
+    var repo = github.getRepo(w98.username, w98.repo);
 
     repo.read('gh-pages', file, function(err, data) {
       frontMatter = matter(data).data
@@ -46,42 +59,43 @@ $(function(){
   if(localStorage.accessToken){
     window.github = new Github({
       token: localStorage.accessToken,
-      auth: "oauth"
+      auth: "oauth",
+      apiUrl: "https://localhost:1234/api/v3"
     });
 
-    $(".ventana").show();
+    $(".w98").show();
   }
 
-  $("body").on("click", ".ventana-edit-button",function(event){
-    $('.ventana-editor').show();
-    $('.ventana-title').show();
-    $('.ventana-editor').val($('[data-ventana=content]').text().trim())
-    $('.ventana-title').val($('[data-ventana=title]').text().trim())
-    var publish = $("<input type=submit class=ventana-publish value=Publish />")
-    $('.ventana-edit-button').replaceWith(publish)
+  $("body").on("click", ".w98-edit-button",function(event){
+    $('.w98-editor').show();
+    $('.w98-title').show();
+    $('.w98-editor').val($('.post-content').text().trim())
+    $('.w98-title').val($('.post-title').text().trim())
+    var publish = $("<input type=submit class=w98-publish value=Publish />")
+    $('.w98-edit-button').replaceWith(publish)
   });
 
-  $('.ventana-editor').keyup(function(){
-    $('[data-ventana=content]').text($(this).val())
+  $('.w98-editor').keyup(function(){
+    $('.post-content').text($(this).val())
   });
 
-  $('.ventana-title').keyup(function(){
-    $('[data-ventana=title]').text($(this).val())
+  $('.w98-title').keyup(function(){
+    $('.post-title').text($(this).val())
   });
 
-  $(".ventana-logout-button").click(function(){
+  $(".w98-logout-button").click(function(){
     localStorage.removeItem("accessToken");
-    $(".ventana").hide()
+    $(".w98").hide()
   });
 
-  $("body").on("click",'.ventana-publish', function(event){
+  $("body").on("click",'.w98-publish', function(event){
     $(event.target).attr("disabled", "true")
     $(event.target).val("Publishing...")
     publish(
       "about.html",
       {
-        content: $('.ventana-editor').val(),
-        title: $('.ventana-title').val()
+        content: $('.w98-editor').val(),
+        title: $('.w98-title').val()
       });
   });
 });
