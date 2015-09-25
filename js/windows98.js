@@ -18,6 +18,10 @@ $(function(){
   $('.w98-login').attr('href', loginLink)
 
   function reloadOnPublish(lastPublishedAt){
+    if(w98.reloadOnUpdate){
+      location.reload();
+    }
+
     $.ajax(
       {
         url: "published_at.html",
@@ -60,7 +64,7 @@ $(function(){
     window.github = new Github({
       token: localStorage.accessToken,
       auth: "oauth",
-      apiUrl: "https://localhost:1234/api/v3"
+      apiUrl: w98.githubApiUrl + "/api/v3"
     });
 
     $(".w98").show();

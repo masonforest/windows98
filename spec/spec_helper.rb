@@ -1,34 +1,33 @@
+require "bundler"
 require "yaml"
 Bundler.require(:test)
 require "capybara/rspec"
+Dir[("./spec/support/**/*.rb")].sort.each { |file| require file }
 content = <<-XXX
 <script>
 w98 = {
   "repo": "window98",
   "username": "masonforest",
-  "github_server": "#{"localhost:1234"}"
+  "githubApiUrl": "#{$fake_github}",
+  "reloadOnUpdate": true
 }
 </script>
 XXX
 
-app = Rack::Builder.new do
+Capybara.app = Rack::Builder.new do
   use Rack::InsertHtml,
     content: content,
     insertion_point: '<script src="js/windows98.js"></script>'
   use Rack::Static,
-    urls: ["/js", "/css"],
+    urls: ["/js", "/css", "/published_at.html"],
     root: "_site",
     index: "index.html",
     header_rules: [
-      [:all, {'Cache-Control' => 'public, max-age=86400'}]
+      [:all, {"Cache-Control" => "public, max-age=86400"}]
     ]
-
-
-  run lambda{ |env| [ 404, { 'Content-Type'  => 'text/html' }, ['404 - page not found'] ] }
+  run lambda{ |env| [ 404, { "Content-Type"  => "text/html" }, ["404 - page not found"] ] }
 end
-# app = Rack::Jekyll.new
 
-Capybara.app = app
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end

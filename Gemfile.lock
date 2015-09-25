@@ -8,7 +8,6 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    blankslate (2.1.2.4)
     capybara (2.5.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -18,58 +17,30 @@ GEM
     capybara-webkit (1.7.1)
       capybara (>= 2.3.0, < 2.6.0)
       json
+    capybara_discoball (0.0.1)
+      capybara
     childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
-    classifier-reborn (2.0.3)
-      fast-stemmer (~> 1.0)
     coderay (1.1.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.9.1.1)
-    colorator (0.1)
     diff-lcs (1.2.5)
-    execjs (2.6.0)
-    fast-stemmer (1.0.2)
     ffi (1.9.10)
-    jekyll (2.5.3)
-      classifier-reborn (~> 2.0)
-      colorator (~> 0.1)
-      jekyll-coffeescript (~> 1.0)
-      jekyll-gist (~> 1.0)
-      jekyll-paginate (~> 1.0)
-      jekyll-sass-converter (~> 1.0)
-      jekyll-watch (~> 1.1)
-      kramdown (~> 1.3)
-      liquid (~> 2.6.1)
-      mercenary (~> 0.3.3)
-      pygments.rb (~> 0.6.0)
-      redcarpet (~> 3.1)
-      safe_yaml (~> 1.0)
-      toml (~> 0.1.0)
-    jekyll-coffeescript (1.0.1)
-      coffee-script (~> 2.2)
-    jekyll-gist (1.3.4)
-    jekyll-paginate (1.1.0)
-    jekyll-sass-converter (1.3.0)
-      sass (~> 3.2)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     jekyll-watch (1.3.0)
       listen (~> 3.0)
     json (1.8.3)
     kramdown (1.8.0)
-    liquid (2.6.3)
     listen (3.0.3)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    mercenary (0.3.5)
     method_source (0.8.2)
     mime-types (2.6.2)
     mini_portile (0.6.2)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    parslet (1.5.0)
-      blankslate (~> 2.0)
     posix-spawn (0.3.11)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -79,15 +50,13 @@ GEM
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.2.0)
     rack (1.6.4)
-    rack-jekyll (0.3.5)
-      jekyll
+    rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rb-fsevent (0.9.6)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
-    redcarpet (3.3.2)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -102,16 +71,17 @@ GEM
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
     rubyzip (1.1.7)
-    safe_yaml (1.0.4)
-    sass (3.4.18)
     selenium-webdriver (2.47.1)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    sinatra (1.4.6)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
     slop (3.6.0)
-    toml (0.1.2)
-      parslet (~> 1.5.0)
+    tilt (2.0.1)
     websocket (1.2.2)
     xpath (2.0.0)
       nokogiri (~> 1.3)
@@ -123,11 +93,16 @@ PLATFORMS
 DEPENDENCIES
   capybara
   capybara-webkit
+  capybara_discoball
+  httparty
+  jekyll-watch
+  kramdown
   pry
+  pygments.rb
   rack-insert_html!
-  rack-jekyll
   rspec
   selenium-webdriver
+  sinatra
 
 BUNDLED WITH
    1.10.6
