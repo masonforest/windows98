@@ -96,7 +96,7 @@ $(function(){
     $(event.target).attr("disabled", "true")
     $(event.target).val("Publishing...")
     publish(
-      "about.html",
+      $('meta[name=path]').attr("content");,
       {
         content: $('.w98-editor').val(),
         title: $('.w98-title').val()
