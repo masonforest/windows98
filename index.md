@@ -1,5 +1,5 @@
 ---
 layout: page
-title: 'Welcome!'
+title: 'Welcome!!!'
 ---
-This is Windows 98!
+Welcome
