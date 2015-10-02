@@ -79,14 +79,15 @@ $(function(){
     $(".w98").show();
   }
 
-  function edit(file){
+  function edit(file, title){
     $('.w98-editor').show();
     $('.w98-title').show();
     var repo = github.getRepo(w98.username, w98.repo);
-    repo.read("gh-pages", file, function(err, data) {
+    repo.read("gh-pages", file, (err, data) => {
       file = matter(data)
       $('.w98-editor').val(file.content)
-      $('.w98-title').val(file.data.title)
+      $('.w98-title').val(title ? title : file.data.title)
+      $('.w98-title').keyup()
     });
 
     var publish = $("<input type=submit class=w98-publish value=Publish />")
@@ -118,7 +119,10 @@ $(function(){
     url = title.replace(/\s+/, "_").toLowerCase() + ".html";
     history.pushState({}, title, url);
 
-    $("body").load("page_template.html", function(){ edit("page_template.html") })
+    $("body").load("page_template.html", function(){
+      $('.post-title').text(title);
+      edit("page_template.html")
+    })
   });
 
   function date(){
@@ -139,7 +143,10 @@ $(function(){
     url = title.replace(/\s+/, "_").toLowerCase() + ".html";
     history.pushState({}, title, url);
 
-    $("body").load("post_template.html", function(){ edit("post_template.md", fileName) })
+    $("body").load("post_template.html", function(){
+      $('.post-title').text(title);
+      edit("post_template.md", title);
+    })
   });
 
   $("body").on("click",'.w98-publish', function(event){
