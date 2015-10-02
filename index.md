@@ -2,8 +2,4 @@
 layout: page
 title: 'Welcome!!!'
 ---
-Welcome
-
-
-
-
+New text here
