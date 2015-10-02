@@ -14,6 +14,15 @@ $(function(){
     window.w98.githubApiUrl = "https://api.github.com";
   }
 
+  if(window.location.hostname == "localhost"){
+    window.w98 = {
+      "username": "masonforest",
+      "repo": "windows98",
+      "reloadOnUpdate": true
+    }
+  };
+
+
   loginLink = $('.w98-login').attr('href') + "&state=" + window.location.href.split('?')[0]
   $('.w98-login').attr('href', loginLink)
 
@@ -73,8 +82,13 @@ $(function(){
   $("body").on("click", ".w98-edit-button",function(event){
     $('.w98-editor').show();
     $('.w98-title').show();
-    $('.w98-editor').val($('.post-content').text().trim())
-    $('.w98-title').val($('.post-title').text().trim())
+    var repo = github.getRepo(w98.username, w98.repo);
+    repo.read("gh-pages", $('meta[name=path]').attr("content"), function(err, data) {
+      file = matter(data)
+      $('.w98-editor').val(file.content)
+      $('.w98-title').val(file.data.title)
+    });
+
     var publish = $("<input type=submit class=w98-publish value=Publish />")
     $('.w98-edit-button').replaceWith(publish)
   });
