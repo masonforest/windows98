@@ -128,7 +128,7 @@ $(function(){
     url = title.replace(/\s+/, "_").toLowerCase() + ".html";
     history.pushState({}, title, url);
 
-    $("body").load("post_template.html", function(){ edit("post_template.html") })
+    $("body").load("post_template.html", function(){ edit("post_template.md") })
   });
 
   $("body").on("click",'.w98-publish', function(event){
