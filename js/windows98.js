@@ -79,11 +79,11 @@ $(function(){
     $(".w98").show();
   }
 
-  $("body").on("click", ".w98-edit-button",function(event){
+  function edit(file){
     $('.w98-editor').show();
     $('.w98-title').show();
     var repo = github.getRepo(w98.username, w98.repo);
-    repo.read("gh-pages", $('meta[name=path]').attr("content"), function(err, data) {
+    repo.read("gh-pages", file, function(err, data) {
       file = matter(data)
       $('.w98-editor').val(file.content)
       $('.w98-title').val(file.data.title)
@@ -91,6 +91,11 @@ $(function(){
 
     var publish = $("<input type=submit class=w98-publish value=Publish />")
     $('.w98-edit-button').replaceWith(publish)
+  }
+
+  $("body").on("click", ".w98-edit-button",function(event){
+    event.preventDefault();
+    edit($('meta[name=path]').attr("content"));
   });
 
   $('.w98-editor').keyup(function(){
@@ -104,6 +109,26 @@ $(function(){
   $(".w98-logout-button").click(function(){
     localStorage.removeItem("accessToken");
     $(".w98").hide()
+  });
+
+  $(".w98-add-page").click(function(e){
+    e.preventDefault();
+    title = prompt("Title:");
+    fileName = title.replace(/\s+/, "_").toLowerCase() + ".md";
+    url = title.replace(/\s+/, "_").toLowerCase() + ".html";
+    history.pushState({}, title, url);
+
+    $("body").load("page_template.html", function(){ edit("page_template.html") })
+  });
+
+  $(".w98-add-post").click(function(e){
+    e.preventDefault();
+    title = prompt("Title:");
+    fileName = title.replace(/\s+/, "_").toLowerCase() + ".md";
+    url = title.replace(/\s+/, "_").toLowerCase() + ".html";
+    history.pushState({}, title, url);
+
+    $("body").load("post_template.html", function(){ edit("post_template.html") })
   });
 
   $("body").on("click",'.w98-publish', function(event){
