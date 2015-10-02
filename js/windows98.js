@@ -100,7 +100,7 @@ $(function(){
   });
 
   $('.w98-editor').keyup(function(){
-    $('.post-content').text($(this).val())
+    $('.post-content').html(marked($(this).val()))
   });
 
   $('.w98-title').keyup(function(){
