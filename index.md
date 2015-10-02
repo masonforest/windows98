@@ -1,6 +1,5 @@
 ---
 layout: page
-title: 'Welcome!!!'
+title: Test
 ---
-New text here!
-
+hi  
