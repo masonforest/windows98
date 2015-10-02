@@ -121,14 +121,25 @@ $(function(){
     $("body").load("page_template.html", function(){ edit("page_template.html") })
   });
 
+  function date(){
+    var date = new Date();
+    var day = (date.getDate() < 10) ?  ("0" + date.getDate()) : date.getDate();
+    var month = date.getMonth();
+    var year = date.getFullYear();
+
+    return year + "-" + month + "-" + day;
+  }
+
   $(".w98-add-post").click(function(e){
     e.preventDefault();
     title = prompt("Title:");
-    fileName = title.replace(/\s+/, "_").toLowerCase() + ".md";
+
+    fileName = "_posts/" + date() +"-"+ title.replace(/\s+/, "-").toLowerCase() + ".md";
+    $('meta[name=path]').attr("content", fileName);
     url = title.replace(/\s+/, "_").toLowerCase() + ".html";
     history.pushState({}, title, url);
 
-    $("body").load("post_template.html", function(){ edit("post_template.md") })
+    $("body").load("post_template.html", function(){ edit("post_template.md", fileName) })
   });
 
   $("body").on("click",'.w98-publish', function(event){

@@ -16,7 +16,9 @@
       <div class="trigger">
         {% for page in site.pages %}
           {% if page.title %}
+          {% unless page.path contains "template" %}
           <a class="page-link" href="{{ page.url | remove_first: '/'}}">{{ page.title }}</a>
+          {% endunless %}
           {% endif %}
         {% endfor %}
       </div>
