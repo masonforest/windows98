@@ -6,6 +6,7 @@ gem "pry"
 gem "kramdown"
 gem "pygments.rb"
 gem "jekyll-watch"
+gem "jekyll"
 
 group :test do
   gem "pry"

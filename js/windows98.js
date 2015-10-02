@@ -143,8 +143,13 @@ $(function(){
               "Test",
               function(a){
                 console.log(a);
-              }
-              )
+                var fileMarkdownText = "![" + currentFile.name.split(".")[0] +
+                "](" +  "https://raw.githubusercontent.com/" + w98.username +
+                "/" +  w98.repo + "/gh-pages/" + w98.uploadPath + "/" +
+                currentFile.name + ")";
+                $(".w98-editor").val($(".w98-editor").val() + " " + fileMarkdownText);
+                }
+              );
           };
         })(f);
 
