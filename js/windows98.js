@@ -22,6 +22,9 @@ $(function(){
     }
   };
 
+  if(!window.w98.uploadPath){
+    window.w98.uploadPath = "images";
+  }
 
   loginLink = $('.w98-login').attr('href') + "&state=" + window.location.href.split('?')[0]
   $('.w98-login').attr('href', loginLink)
@@ -47,7 +50,6 @@ $(function(){
 
   function publish(file, page){
     var repo = github.getRepo(w98.username, w98.repo);
-
     repo.read('gh-pages', file, function(err, data) {
       frontMatter = matter(data).data
       frontMatter.title = page.title
@@ -62,6 +64,17 @@ $(function(){
         }
         )
     });
+  }
+
+  function insertImageAtCaret(element, image){
+    var imageMarkup = "![Alt]("+ image.src +")"
+    insertAtCaret(element, imageMarkup);
+  }
+
+  function insertAtCaret(element, content){
+    var caretPos = element.selectionStart;
+    var textAreaTxt = $(element).val();
+    $(element).val(content.substring(0, caretPos) + content + content.substring(caretPos) );
   }
 
   if (window.location.href.match(/\?access_token=(.*)/)){
@@ -104,6 +117,40 @@ $(function(){
   $(".w98-logout-button").click(function(){
     localStorage.removeItem("accessToken");
     $(".w98").hide()
+  });
+
+  $(".w98-editor").on({
+    dragenter: function(e) {
+      $(this).css('background-color', '#eef');
+    },
+    dragleave: function(e) {
+      $(this).css('background-color', 'white');
+    },
+    drop: function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      files = e.originalEvent.dataTransfer.files;
+      for (var i = 0, f; f = files[i]; i++) {
+        var reader = new FileReader();
+
+        reader.onload = ((currentFile) => {
+          return function(e) {
+            var repo = github.getRepo(w98.username, w98.repo);
+            repo.write(
+              "gh-pages",
+              w98.uploadPath + "/" + currentFile.name,
+              e.target.result,
+              "Test",
+              function(a){
+                console.log(a);
+              }
+              )
+          };
+        })(f);
+
+        reader.readAsBinaryString(f);
+      }
+    }
   });
 
   $("body").on("click",'.w98-publish', function(event){
