@@ -1,11 +1,5 @@
 ---
 layout: page
-title: 'Test!'
+title: heyyy
 ---
 hi  
- ![oculus](https://raw.githubusercontent.com/masonforest/windows98/gh-pages/images/oculus.jpg)
-
-
-Hi Cole!!!!!
-==
-
