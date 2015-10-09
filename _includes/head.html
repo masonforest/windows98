@@ -1,7 +1,11 @@
-{%if page.url == "/index.html" or page.path == "blog.html"%}
+{% if page.url == "/index.html" or page.path == "blog.html" %}
   {% assign baseurl = "./" %}
 {% else %}
-  {% assign baseurl = "../" %}
+  {% if page.path contains "_posts" %}
+    {% assign baseurl = "../" %}
+  {% else %}
+    {% assign baseurl = "../../.." %}
+  {% end %}
 {% endif %}
 <head>
   <base href="{{baseurl}}">
