@@ -2,9 +2,9 @@
   {% assign baseurl = "./" %}
 {% else %}
   {% if page.path contains "_posts" %}
-    {% assign baseurl = "../" %}
-  {% else %}
     {% assign baseurl = "../../.." %}
+  {% else %}
+    {% assign baseurl = "../" %}
   {% end %}
 {% endif %}
 <head>
