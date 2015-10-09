@@ -57,7 +57,7 @@ $(function(){
       contents,
       "Windows 98 - Update",
       function(){
-    //    reloadOnPublish();
+        reloadOnPublish();
       }
       )
   }
