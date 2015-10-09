@@ -48,20 +48,18 @@ $(function(){
   function publish(file, page){
     var repo = github.getRepo(w98.username, w98.repo);
 
-    repo.read('gh-pages', file, function(err, data) {
-      frontMatter = matter(data).data
-      frontMatter.title = page.title
-      contents = matter.stringify(page.content, frontMatter)
-      repo.write(
-        'gh-pages',
-        file,
-        contents,
-        "Windows 98 - Update",
-        function(){
-          reloadOnPublish();
-        }
-        )
-    });
+    frontMatter = JSON.parse(localStorage.data);
+    frontMatter.title = page.title
+    contents = matter.stringify(page.content, frontMatter)
+    repo.write(
+      'gh-pages',
+      file,
+      contents,
+      "Windows 98 - Update",
+      function(){
+    //    reloadOnPublish();
+      }
+      )
   }
 
   if (window.location.href.match(/\?access_token=(.*)/)){
@@ -85,6 +83,7 @@ $(function(){
     var repo = github.getRepo(w98.username, w98.repo);
     repo.read("gh-pages", file, (err, data) => {
       file = matter(data)
+      localStorage.data = JSON.stringify(file.data);
       $('.w98-editor').val(file.content)
       $('.w98-title').val(title ? title : file.data.title)
       $('.w98-title').keyup()
@@ -116,12 +115,12 @@ $(function(){
     e.preventDefault();
     title = prompt("Title:");
     fileName = title.replace(/\s+/, "_").toLowerCase() + ".md";
-    url = title.replace(/\s+/, "_").toLowerCase() + ".html";
+    url = title.replace(/\s+/g, "_").toLowerCase() + ".html";
     history.pushState({}, title, url);
 
     $("body").load("page_template.html", function(){
       $('.post-title').text(title);
-      edit("page_template.html")
+      edit("page_template.md")
     })
   });
 
@@ -140,7 +139,8 @@ $(function(){
 
     fileName = "_posts/" + date() +"-"+ title.replace(/\s+/, "-").toLowerCase() + ".md";
     $('meta[name=path]').attr("content", fileName);
-    url = title.replace(/\s+/, "_").toLowerCase() + ".html";
+    url = "posts/" + date() + title.replace(/\s+/g, "_").toLowerCase() + ".html";
+    $("base").attr("href", "../")
     history.pushState({}, title, url);
 
     $("body").load("post_template.html", function(){
