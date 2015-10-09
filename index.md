@@ -1,5 +1,5 @@
 ---
-layout: page
-title: heyyy
+layout: post
+title: Titlesdfsd
 ---
-hi  
+sdfsdf
