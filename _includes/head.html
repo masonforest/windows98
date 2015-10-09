@@ -1,4 +1,4 @@
-{%if page.url == "/index.html" or page.url == "blog.html"%}
+{%if page.url == "/index.html" or page.path == "blog.html"%}
   {% assign baseurl = "./" %}
 {% else %}
   {% assign baseurl = "../" %}
