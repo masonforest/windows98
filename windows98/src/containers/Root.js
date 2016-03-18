@@ -10,11 +10,10 @@ export default class Root extends React.Component {
   };
 
   get content () {
-    alert('loadin content')
     return (
       <div>
         hi
-        <Router history={this.props.history}>
+        <Router path='/admin' history={this.props.history}>
           {this.props.routes}
         </Router>
       </div>
