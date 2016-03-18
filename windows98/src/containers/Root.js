@@ -12,7 +12,6 @@ export default class Root extends React.Component {
   get content () {
     return (
       <div>
-        hi
         <Router path='/' history={this.props.history}>
           {this.props.routes}
         </Router>
