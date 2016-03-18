@@ -13,7 +13,7 @@ export default class Root extends React.Component {
     return (
       <div>
         hi
-        <Router path='/windows98/admin/' history={this.props.history}>
+        <Router path='/' history={this.props.history}>
           {this.props.routes}
         </Router>
       </div>
