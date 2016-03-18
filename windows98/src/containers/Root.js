@@ -10,6 +10,7 @@ export default class Root extends React.Component {
   };
 
   get content () {
+    alert('loadin content')
     return (
       <div>
         hi
