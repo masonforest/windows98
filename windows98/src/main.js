@@ -7,6 +7,18 @@ import makeRoutes from './routes'
 import Root from './containers/Root'
 import configureStore from './redux/configureStore'
 
+let accessToken
+if(window.location.search.match(/access_token=(.*)/)){
+  let accessToken = window.location.search.replace("?", "").match(/access_token=(.*)/)[1];
+  localStorage.accessToken = accessToken;
+  debugger
+  window.location.href = window.location.href.replace(/\?.*/,"")
+}
+
+if(!localStorage.accessToken){
+  window.location.href = 'https://github.com/login/oauth/authorize?client_id=6796421fbf29cfb0ffc4&scope=repo&state=' + window.location.href
+}
+
 // Configure history for react-router
 const browserHistory = useRouterHistory(createBrowserHistory)({
   basename: window.location.pathname
