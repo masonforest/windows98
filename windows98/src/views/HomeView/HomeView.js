@@ -28,8 +28,8 @@ export class HomeView extends React.Component<void, Props, void> {
     fetchFiles: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.props.fetchFiles()
   }
 

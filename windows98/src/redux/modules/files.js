@@ -1,14 +1,22 @@
-import update from 'react-addons-update';
+import update from 'react-addons-update'
 
 export const FETCH_FILES = 'FETCH_FILES'
+export const EDIT_FILE = 'EDIT_FILE'
 
 export function fetchFiles (): Action {
   return (dispatch) => fetch('https://api.github.com/repos/masonforest/windows98/contents/?ref=gh-pages')
     .then(res => res.json())
     .then(json => dispatch({
-        type: FETCH_FILES,
-        files: json
-  }));
+      type: FETCH_FILES,
+      files: json
+    }))
+}
+
+export function editFile (file): Action {
+  return {
+    type: EDIT_FILE,
+    file: file
+  }
 }
 
 export const actions = {
@@ -16,7 +24,8 @@ export const actions = {
 }
 
 const ACTION_HANDLERS = {
-  [FETCH_FILES]: (state: files, action: {payload: files}): files => update(state, {$push: action.files})
+  [FETCH_FILES]: (state: files, action: {payload: files}): files =>
+    update(state, {$push: action.files})
 }
 
 const initialState = []
