@@ -2,4 +2,4 @@
 layout: post
 title: Test
 ---
-Bam!!!!
+This is my blog
