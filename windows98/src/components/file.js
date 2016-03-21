@@ -1,22 +1,29 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { editFile } from '../redux/modules/files'
 
 class File extends Component {
   static propTypes = {
     editFile: PropTypes.func.isRequired,
+    file: PropTypes.object.isRequired
   };
 
-  render () {
-    return <div><a onClick={this.props.editFile}>{this.props.name}</a></div>
+  constructor () {
+    super()
+    this._onClick = this._onClick.bind(this)
   }
-  _handleClick () {
-    console.log(this.props.url)
+
+  render () {
+    return <div><a onClick={this._onClick}>{this.props.file.name}</a></div>
+  }
+  _onClick () {
+    this.props.editFile(this.props.file)
   }
 }
 
 const mapStateToProps = (state) => ({
-  files: state.files
+  activeFile: state.files.activeFile
 })
 export default connect((mapStateToProps), {
-  editFile: () => editFile()
+  editFile: (file) => editFile(file)
 })(File)

@@ -3,8 +3,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchFiles } from '../../redux/modules/files'
 import File from '../../components/file'
-import DuckImage from './Duck.jpg'
-import classes from './HomeView.scss'
+import Editor from '../../components/editor'
 
 // We can use Flow (http://flowtype.org/) to type our component's props
 // and state. For convenience we've included both regular propTypes and
@@ -25,7 +24,7 @@ type Props = {
 export class HomeView extends React.Component<void, Props, void> {
   static propTypes = {
     files: PropTypes.array.isRequired,
-    fetchFiles: PropTypes.func.isRequired,
+    fetchFiles: PropTypes.func.isRequired
   };
 
   constructor (props) {
@@ -36,16 +35,18 @@ export class HomeView extends React.Component<void, Props, void> {
   render () {
     return (
       <div className='container'>
-      {this.props.files.map((file) =>
-        <File key={file.url} name={file.name} url={file.url} />
-      )}
+        <Editor />
+        {this.props.files.map((file) =>
+          <File key={file.url} file={file} />
+        )}
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  files: state.files
+  activeFile: state.files.activeFile,
+  files: state.files.files
 })
 export default connect((mapStateToProps), {
   fetchFiles: () => fetchFiles()
