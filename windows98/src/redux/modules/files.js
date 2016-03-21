@@ -38,10 +38,10 @@ export function save (file): Action {
   return (dispatch, getState) => {
     let github = new Github({
       token: localStorage.accessToken,
-      auth: "oauth"
-    });
+      auth: 'oauth'
+    })
 
-    let repo = github.getRepo('masonforest', 'windows98');
+    let repo = github.getRepo('masonforest', 'windows98')
 
     repo.write(
       'gh-pages',

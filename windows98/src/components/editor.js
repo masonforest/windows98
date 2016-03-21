@@ -23,7 +23,7 @@ class Editor extends Component {
   render () {
     return (
       <div>
-        <textarea style={{width: "500px", height: "200px"}} valueLink={this.contentValueLink()} />
+        <textarea style={{width: '500px', height: '200px'}} valueLink={this.contentValueLink()} />
         <br />
         <button onClick={this.props.save}>Save</button>
       </div>
