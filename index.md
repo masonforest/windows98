@@ -1,5 +1,5 @@
 ---
 layout: post
-title: Test
+title: Testing Windows 98
 ---
-This is my blog
+Testing Windows 98
