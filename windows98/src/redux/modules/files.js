@@ -48,7 +48,8 @@ export function save (file): Action {
        getState().files.activeFile.path,
        getState().files.activeFile.content,
        'Windows 98 - Update',
-       {}
+       {},
+       () => console.log('done')
       )
   }
 }
