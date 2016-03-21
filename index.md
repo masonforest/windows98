@@ -1,8 +1,8 @@
 ---
 layout: post
-title: WEEEE
+title: Test
 ---
-sdfsdf!
+This is my blog post
 
 
 
